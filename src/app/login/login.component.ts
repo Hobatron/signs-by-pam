@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Auth } from '@angular/fire/auth';
 import { AuthService } from '../services/auth.service';
 import { User } from '../models/user';
 
@@ -11,7 +10,7 @@ import { User } from '../models/user';
 export class LoginComponent {
   login = false;
   optionSelected = false;
-  constructor(private auth: Auth, private authService: AuthService) {}
+  constructor(private authService: AuthService) {}
 
   googleLogin() {
     this.authService.login(this.authService.googleProvider);

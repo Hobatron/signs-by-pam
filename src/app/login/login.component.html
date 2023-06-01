@@ -9,10 +9,40 @@
     </button>
   </div>
 
-  <div *ngIf="optionSelected">
+  <div class="login-box" *ngIf="optionSelected">
     <div *ngIf="login; else signUp">
+      <div class="integration-logins">
+        <button mat-raised-button>
+          <app-facebook></app-facebook>
+          Facebook
+        </button>
+        <button mat-raised-button>
+          <app-google></app-google>
+          Google
+        </button>
+      </div>
+      <div class="or-divide"><span>Or</span></div>
+      <mat-form-field class="login-input">
+        <mat-label>Username</mat-label>
+        <input type="text" matInput />
+      </mat-form-field>
+      <br />
+      <mat-form-field class="login-input">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput />
+      </mat-form-field>
+      <br />
+      <button mat-raised-button color="primary" (click)="optionPicked(true)">
+        Login
+      </button>
+      &nbsp;
       <button mat-button color="primary" (click)="optionPicked(false)">
-        Sign up
+        Forgot password?
+      </button>
+      <br />
+      Need an account?
+      <button mat-button color="primary" (click)="optionPicked(false)">
+        Create account
       </button>
     </div>
     <ng-template #signUp>
