@@ -1,7 +1,9 @@
 <div class="main-container">
   <div class="form-container">
     <mat-tab-group dynamicHeight dynamicWidth>
-      <mat-tab label="Style"> Container 1 </mat-tab>
+      <mat-tab label="Style"> 
+        <button (click)="this.authService.logout()">Logout</button>
+      </mat-tab>
       <mat-tab label="Colors">
         <div style="height: 500px"></div>
       </mat-tab>

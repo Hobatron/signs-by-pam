@@ -35,7 +35,7 @@ export class AuthService {
   login(provider: AuthProvider) {
     signInWithPopup(this.auth2, provider)
       .then((result) => {
-        //
+        console.log('result', result);
       })
       .catch((error) => {
         // Handle Errors here.

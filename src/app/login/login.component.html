@@ -10,13 +10,12 @@
   </div>
 
   <div class="login-box" *ngIf="optionSelected">
-    <div *ngIf="login; else signUp">
       <div class="integration-logins">
         <button mat-raised-button>
           <app-facebook></app-facebook>
           Facebook
         </button>
-        <button mat-raised-button>
+        <button mat-raised-button (click)="googleLogin()">
           <app-google></app-google>
           Google
         </button>
@@ -26,29 +25,46 @@
         <mat-label>Username</mat-label>
         <input type="text" matInput />
       </mat-form-field>
-      <br />
       <mat-form-field class="login-input">
         <mat-label>Password</mat-label>
         <input type="password" matInput />
       </mat-form-field>
-      <br />
-      <button mat-raised-button color="primary" (click)="optionPicked(true)">
-        Login
-      </button>
-      &nbsp;
-      <button mat-button color="primary" (click)="optionPicked(false)">
-        Forgot password?
-      </button>
-      <br />
-      Need an account?
-      <button mat-button color="primary" (click)="optionPicked(false)">
-        Create account
-      </button>
+      <div *ngIf="login; else signUp">
+        <br />
+        <button mat-raised-button color="primary" (click)="optionPicked(true)">
+          Login
+        </button>
+        &nbsp;
+        <button mat-button color="primary" (click)="optionPicked(false)">
+          Forgot password?
+        </button>
+        <br />
+        Need an account?
+        <button mat-button color="primary" (click)="optionPicked(false)">
+          Create account
+        </button>
+      </div>
+      <ng-template #signUp>
+        <mat-form-field class="login-input">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput />
+        </mat-form-field>
+        <mat-form-field class="login-input">
+          <mat-label>First Name</mat-label>
+          <input type="text" matInput />
+        </mat-form-field>
+        <mat-form-field class="login-input">
+          <mat-label>Last Name</mat-label>
+          <input type="text" matInput />
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="optionPicked(true)">
+          Create Account
+        </button>
+        <br />
+        Already have an account?
+        <button mat-button color="primary" (click)="optionPicked(true)">
+          Login
+        </button>
+      </ng-template>
     </div>
-    <ng-template #signUp>
-      <button mat-button color="primary" (click)="optionPicked(true)">
-        Login
-      </button>
-    </ng-template>
   </div>
-</div>
