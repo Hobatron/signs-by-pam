@@ -1,70 +1,148 @@
 <div style="display: flex; justify-content: center">
-  <div *ngIf="!optionSelected">
-    <button mat-button color="primary" (click)="optionPicked(true)">
-      Login
-    </button>
-    /
-    <button mat-button color="primary" (click)="optionPicked(false)">
-      Sign up
-    </button>
-  </div>
-
-  <div class="login-box" *ngIf="optionSelected">
-      <div class="integration-logins">
-        <button mat-raised-button>
-          <app-facebook></app-facebook>
-          Facebook
-        </button>
-        <button mat-raised-button (click)="googleLogin()">
-          <app-google></app-google>
-          Google
-        </button>
-      </div>
-      <div class="or-divide"><span>Or</span></div>
-      <mat-form-field class="login-input">
-        <mat-label>Username</mat-label>
-        <input type="text" matInput />
-      </mat-form-field>
-      <mat-form-field class="login-input">
-        <mat-label>Password</mat-label>
-        <input type="password" matInput />
-      </mat-form-field>
-      <div *ngIf="login; else signUp">
-        <br />
-        <button mat-raised-button color="primary" (click)="optionPicked(true)">
-          Login
-        </button>
-        &nbsp;
-        <button mat-button color="primary" (click)="optionPicked(false)">
-          Forgot password?
-        </button>
-        <br />
-        Need an account?
-        <button mat-button color="primary" (click)="optionPicked(false)">
-          Create account
-        </button>
-      </div>
-      <ng-template #signUp>
-        <mat-form-field class="login-input">
-          <mat-label>Email</mat-label>
-          <input type="email" matInput />
-        </mat-form-field>
-        <mat-form-field class="login-input">
-          <mat-label>First Name</mat-label>
-          <input type="text" matInput />
-        </mat-form-field>
-        <mat-form-field class="login-input">
-          <mat-label>Last Name</mat-label>
-          <input type="text" matInput />
-        </mat-form-field>
-        <button mat-raised-button color="primary" (click)="optionPicked(true)">
-          Create Account
-        </button>
-        <br />
-        Already have an account?
+    <div *ngIf="!optionSelected">
         <button mat-button color="primary" (click)="optionPicked(true)">
-          Login
+            Login
         </button>
-      </ng-template>
+        /
+        <button mat-button color="primary" (click)="optionPicked(false)">
+            Sign up
+        </button>
     </div>
-  </div>
+
+    <div class="login-box" *ngIf="optionSelected">
+        <div class="integration-logins">
+            <button mat-raised-button>
+                <app-facebook></app-facebook>
+                Facebook
+            </button>
+            <button mat-raised-button (click)="googleLogin()">
+                <app-google></app-google>
+                Google
+            </button>
+        </div>
+        <div class="or-divide"><span>Or</span></div>
+        <div *ngIf="login; else signUp">
+            <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
+                <mat-form-field class="login-input">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput formControlName="email" />
+                </mat-form-field>
+                <mat-form-field class="login-input">
+                    <mat-label>Password</mat-label>
+                    <input
+                        type="password"
+                        matInput
+                        formControlName="password"
+                    />
+                </mat-form-field>
+                <button mat-raised-button color="primary" type="submit">
+                    Login
+                </button>
+                &nbsp;
+                <button
+                    mat-button
+                    color="primary"
+                    (click)="optionPicked(false)"
+                >
+                    Forgot password?
+                </button>
+            </form>
+            <br />
+            Need an account?
+            <button mat-button color="primary" (click)="optionPicked(false)">
+                Create account
+            </button>
+        </div>
+        <ng-template #signUp>
+            <form [formGroup]="signUpForm" (ngSubmit)="createSubmit()">
+                <mat-form-field class="login-input">
+                    <mat-label>First Name</mat-label>
+                    <input type="text" matInput formControlName="firstName" />
+                </mat-form-field>
+                <mat-form-field class="login-input">
+                    <mat-label>Last Name</mat-label>
+                    <input type="text" matInput formControlName="lastName" />
+                </mat-form-field>
+                <mat-form-field class="login-input">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput formControlName="email" />
+                </mat-form-field>
+                <mat-form-field class="login-input">
+                    <mat-label>Password</mat-label>
+                    <input
+                        type="password"
+                        matInput
+                        formControlName="password"
+                    />
+                    <mat-error
+                        *ngIf="signUpForm.get('password')?.hasError('required')"
+                    >
+                        Password is required
+                    </mat-error>
+                    <mat-error
+                        *ngIf="
+                            signUpForm.get('password')?.hasError('minlength')
+                        "
+                    >
+                        Password must be at least 6 characters long
+                    </mat-error>
+                    <mat-error
+                        *ngIf="
+                            signUpForm.get('password')?.hasError('maxlength')
+                        "
+                    >
+                        Password cannot exceed 25 characters
+                    </mat-error>
+                    <mat-error
+                        *ngIf="
+                            signUpForm.hasError('passwordMismatch', 'password')
+                        "
+                    >
+                        Passwords do not match
+                    </mat-error>
+                    <mat-error
+                        *ngIf="signUpForm.hasError('requireNumber', 'password')"
+                    >
+                        Password must contain a number
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="login-input">
+                    <mat-label>Confirm Password</mat-label>
+                    <input
+                        type="password"
+                        matInput
+                        formControlName="confirmPassword"
+                    />
+                    <mat-error
+                        *ngIf="
+                            signUpForm
+                                .get('confirmPassword')
+                                ?.hasError('required')
+                        "
+                    >
+                        Confirm Password is required
+                    </mat-error>
+                    <mat-error
+                        *ngIf="
+                            signUpForm.hasError(
+                                'passwordMismatch',
+                                'confirmPassword'
+                            )
+                        "
+                    >
+                        Passwords do not match
+                    </mat-error>
+                </mat-form-field>
+
+                <button type="submit" mat-raised-button color="primary">
+                    Create Account
+                </button>
+            </form>
+            <br />
+            Already have an account?
+            <button mat-button color="primary" (click)="optionPicked(true)">
+                Login
+            </button>
+        </ng-template>
+    </div>
+</div>

@@ -1,39 +1,39 @@
 .login-box {
-  padding: 15px;
-  width: 65%;
+    padding: 15px;
+    width: 65%;
 }
 
 .integration-logins {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 .or-divide {
-  text-align: center;
-  color: #969696;
-  position: relative;
-  margin: 20px 0 20px;
+    text-align: center;
+    color: #969696;
+    position: relative;
+    margin: 20px 0 20px;
 }
 
 .or-divide span {
-  background: #e6e6e6;
-  z-index: 1;
-  position: relative;
-  padding: 0 10px;
-  font-size: 14px;
+    background: #e6e6e6;
+    z-index: 1;
+    position: relative;
+    padding: 0 10px;
+    font-size: 14px;
 }
 
 .or-divide:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 1px;
-  background: #969696;
-  left: 0;
-  top: 50%;
-  z-index: 0;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: #969696;
+    left: 0;
+    top: 50%;
+    z-index: 0;
 }
 
 .login-input {
-  display: block;
+    display: block;
 }
